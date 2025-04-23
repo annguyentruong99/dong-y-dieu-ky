@@ -1,26 +1,48 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #ffffff; /* White */
+  --foreground: #5D534B; /* Dark text */
+  --primary: #8B7B6B; /* Primary accent */
+  --primary-foreground: #ffffff; /* White on Primary */
+  --secondary: #EBE6E0; /* Light accent background */
+  --secondary-foreground: #76614C; /* Darker accent/text */
+  --muted: #F8F5F2; /* Light background/surface */
+  --muted-foreground: #A69B8D; /* Medium/secondary text */
+  --accent: #76614C; /* Darker accent/text (reusing) */
+  --accent-foreground: #ffffff; /* White on Accent */
+  --border: #D7CEC7; /* Border/divider */
+  --input: #D7CEC7; /* Input border (using border color) */
+  --ring: #8B7B6B; /* Ring (using primary color) */
+  --placeholder: #ADAEBC; /* Placeholder text */
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-placeholder: var(--placeholder);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: Inter, Arial, Helvetica, sans-serif;
+  /* Keep existing mono font or define one if needed */
+  /* --font-mono: var(--font-geist-mono); */
+
+  /* Add other theme properties like spacing, borderRadius if needed */
+  --radius: 12px; /* From various elements like cards */
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
 }
