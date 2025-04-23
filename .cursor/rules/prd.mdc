@@ -1,0 +1,406 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Tài Liệu Yêu Cầu Sản Phẩm (PRD)
+
+## Website Blog Đông Y Kỳ Diệu
+
+### 1. Giới thiệu
+
+### 1.1 Mục đích
+
+"Đông Y Kỳ Diệu" là website blog chia sẻ kiến thức, kinh nghiệm và thông tin về Đông Y và y học cổ truyền Việt Nam. Website nhằm tạo ra một nền tảng thông tin đáng tin cậy, dễ tiếp cận cho tất cả đối tượng quan tâm đến Đông Y, từ người dùng phổ thông đến các chuyên gia y tế.
+
+### 1.2 Phạm vi
+
+Website bao gồm các chức năng chính sau:
+
+- Hệ thống quản lý nội dung (CMS) cho phép đăng tải và quản lý bài viết
+- Hệ thống phân loại và tìm kiếm bài viết theo chủ đề và bệnh lý
+- Hệ thống bình luận và tương tác người dùng (like, comment)
+- Hệ thống xác thực và phân quyền người dùng
+- Hiển thị các bài viết nổi bật trên trang chủ
+- Bộ lọc bài viết theo các bệnh lý và chủ đề Đông Y
+
+### 1.3 Tầm nhìn sản phẩm
+
+Trở thành nguồn thông tin hàng đầu về Đông Y tại Việt Nam, kết nối cộng đồng người quan tâm đến y học cổ truyền và cung cấp kiến thức bổ ích, dễ hiểu và khoa học về các phương pháp điều trị Đông Y.
+
+### 2. Đối tượng người dùng
+
+### 2.1 Người dùng mục tiêu
+
+1. **Người quan tâm đến Đông Y và y học cổ truyền Việt Nam**
+    - Mục tiêu: Tìm hiểu kiến thức cơ bản về Đông Y
+    - Nhu cầu: Thông tin dễ hiểu, trực quan, không quá chuyên sâu
+2. **Bệnh nhân tìm kiếm thông tin về các phương pháp điều trị Đông Y**
+    - Mục tiêu: Tìm kiếm giải pháp cho các vấn đề sức khỏe cụ thể
+    - Nhu cầu: Thông tin về các phương pháp điều trị, kinh nghiệm từ người đã điều trị
+3. **Sinh viên y khoa và các nhà nghiên cứu về y học cổ truyền**
+    - Mục tiêu: Tìm kiếm tài liệu tham khảo chuyên môn
+    - Nhu cầu: Thông tin chuyên sâu, chính xác, có trích dẫn nguồn
+4. **Thầy thuốc Đông Y**
+    - Mục tiêu: Tham khảo y án và chia sẻ kinh nghiệm
+    - Nhu cầu: Diễn đàn trao đổi chuyên môn, cập nhật kiến thức mới
+5. **Người tìm hiểu về dược liệu và phương pháp Đông Y**
+    - Mục tiêu: Tìm hiểu về các loại thảo dược và cách sử dụng
+    - Nhu cầu: Thông tin chi tiết về dược liệu, công dụng và cách sử dụng
+
+### 2.2 Phân tích nhu cầu người dùng
+
+- Tìm kiếm thông tin nhanh chóng, chính xác về các vấn đề Đông Y
+- Lọc bài viết theo bệnh lý cụ thể
+- Tương tác với cộng đồng để trao đổi kinh nghiệm
+- Đọc các y án điển hình theo từng bệnh lý
+- Đăng tải và chia sẻ kiến thức, kinh nghiệm cá nhân
+- Tiếp cận thông tin về các bài thuốc, phương pháp châm cứu
+- Tìm hiểu về các bác sĩ Đông Y
+
+### 3. Yêu cầu chức năng
+
+### 3.1 Hệ thống xác thực và phân quyền (Authentication)
+
+- **Đăng ký/Đăng nhập**
+    - Đăng ký tài khoản bằng email hoặc tài khoản mạng xã hội
+    - Đăng nhập bằng email/mật khẩu hoặc tài khoản mạng xã hội
+    - Khôi phục mật khẩu qua email
+- **Phân quyền người dùng**
+    - Admin: Quản lý toàn bộ hệ thống
+    - Tác giả: Tạo và quản lý bài viết của mình
+    - Người dùng thông thường: Đọc, bình luận và like bài viết
+
+### 3.2 Quản lý nội dung
+
+- **Bài viết**
+    - Tạo, chỉnh sửa, xóa bài viết
+    - Hỗ trợ định dạng rich text với hình ảnh, video
+    - Phân loại bài viết theo chủ đề và bệnh lý
+    - Hệ thống tag và từ khóa
+    - Đánh dấu bài viết nổi bật
+- **Phân loại bài viết theo bệnh lý (TOP FEATURE)**
+    - Bệnh Gan - Mật
+    - Bệnh Thận - Tiết Niệu
+    - Bệnh Xương Khớp - Phong Thấp
+    - Bệnh Hệ Tiêu Hóa
+    - Bệnh Hệ Hô Hấp
+    - Bệnh Tim Mạch
+    - Nội Khoa Tạp Bệnh (Các bệnh nội khoa khác: rối loạn chuyển hóa, nội tiết, suy nhược...)
+    - Phụ khoa
+    - Nhi khoa
+    - Da liễu
+- **Phân loại bài viết theo chủ đề Đông Y**
+    - Câu chuyện về châm cứu
+    - Câu chuyện về bác sĩ Đông Y
+    - Bài thuốc Đông Y
+    - Kỹ thuật châm cứu
+    - Kinh nghiệm điều trị
+    - Các phương pháp khác (xoa bóp, bấm huyệt, cứu...)
+
+### 3.3 Tương tác người dùng
+
+- **Bình luận**
+    - Thêm, chỉnh sửa, xóa bình luận
+    - Phản hồi bình luận
+    - Báo cáo bình luận không phù hợp
+- **Like bài viết**
+    - Like/unlike bài viết
+    - Hiển thị số lượng like của bài viết
+- **Chia sẻ**
+    - Chia sẻ bài viết lên mạng xã hội
+    - Gửi bài viết qua email
+
+### 3.4 Tìm kiếm và lọc
+
+- **Tìm kiếm**
+    - Tìm kiếm theo từ khóa
+    - Tìm kiếm nâng cao (theo tác giả, danh mục, tag)
+    - Gợi ý tìm kiếm thông minh
+- **Bộ lọc bài viết**
+    - Lọc theo bệnh lý
+    - Lọc theo chủ đề Đông Y
+    - Lọc theo mức độ phổ biến
+    - Lọc theo thời gian đăng
+
+### 3.5 Hiển thị bài viết nổi bật (Highlight)
+
+- Carousel hiển thị các bài viết nổi bật trên trang chủ
+- Phân mục bài viết nổi bật theo các chủ đề:
+    - Y án mới nhất
+    - Bác sĩ nổi bật
+    - Bài viết được đánh giá cao
+    - Chủ đề hot
+
+### 4. Yêu cầu phi chức năng
+
+### 4.1 Hiệu suất
+
+- Tải trang dưới 2 giây
+- Tối ưu hóa hình ảnh và nội dung
+- Tối ưu hóa SEO cho các công cụ tìm kiếm
+
+### 4.2 Khả năng sử dụng
+
+- Giao diện thân thiện, dễ sử dụng
+- Responsive design cho tất cả thiết bị
+- Tối ưu trải nghiệm người dùng trên mobile
+- Dễ dàng tìm kiếm và truy cập thông tin
+
+### 4.3 Độ tin cậy
+
+- Uptime >99.5%
+- Sao lưu dữ liệu định kỳ
+- Xử lý lỗi graceful
+
+### 4.4 Bảo mật
+
+- Mã hóa mật khẩu và thông tin nhạy cảm
+- Bảo vệ khỏi các cuộc tấn công phổ biến (SQL injection, XSS)
+- HTTPS cho toàn bộ website
+- Tuân thủ quy định về bảo vệ dữ liệu
+
+### 4.5 Khả năng mở rộng
+
+- Thiết kế cho phép dễ dàng mở rộng tính năng
+- Có khả năng xử lý tăng trưởng người dùng
+
+### 5. Kiến trúc kỹ thuật
+
+### 5.1 Stack công nghệ
+
+- **Frontend**: Next.js với TypeScript
+    - Framework React cho Server-Side Rendering và Static Generation
+    - TypeScript cho type safety
+    - Tailwind CSS cho styling
+    - Context API hoặc Redux cho state management
+- **Backend**: Supabase
+    - Authentication: Xác thực người dùng
+    - Database: PostgreSQL cho lưu trữ dữ liệu bài viết và bình luận
+    - Storage: Lưu trữ hình ảnh và tài liệu
+    - Realtime: Cập nhật realtime cho bình luận và like
+
+### 5.2 Mô hình dữ liệu
+
+- **User**
+    - id (PK)
+    - email
+    - password (hash)
+    - full_name
+    - role (admin, author, user)
+    - avatar
+    - created_at
+    - updated_at
+- **Disease_Category**
+    - id (PK)
+    - name
+    - slug
+    - description
+    - created_at
+    - updated_at
+- **Topic_Category**
+    - id (PK)
+    - name
+    - slug
+    - description
+    - created_at
+    - updated_at
+- **Post**
+    - id (PK)
+    - title
+    - slug
+    - content
+    - excerpt
+    - featured_image
+    - is_featured (boolean)
+    - author_id (FK -> User)
+    - disease_category_id (FK -> Disease_Category, nullable)
+    - topic_category_id (FK -> Topic_Category, nullable)
+    - view_count
+    - like_count
+    - created_at
+    - updated_at
+- **Tag**
+    - id (PK)
+    - name
+    - slug
+    - created_at
+    - updated_at
+- **Post_Tag** (many-to-many)
+    - post_id (FK -> Post)
+    - tag_id (FK -> Tag)
+- **Comment**
+    - id (PK)
+    - content
+    - post_id (FK -> Post)
+    - user_id (FK -> User)
+    - parent_id (FK, self-reference for replies)
+    - created_at
+    - updated_at
+- **Like**
+    - id (PK)
+    - post_id (FK -> Post)
+    - user_id (FK -> User)
+    - created_at
+
+### 5.3 API Endpoints
+
+- **/api/auth** - Xác thực và quản lý người dùng
+- **/api/posts** - CRUD cho bài viết
+- **/api/disease-categories** - CRUD cho danh mục bệnh lý
+- **/api/topic-categories** - CRUD cho danh mục chủ đề
+- **/api/tags** - CRUD cho tags
+- **/api/comments** - CRUD cho bình luận
+- **/api/likes** - Thêm/xóa like
+- **/api/search** - Tìm kiếm
+- **/api/featured** - Lấy bài viết nổi bật
+
+### 6. Giao diện người dùng
+
+### 6.1 Trang chủ
+
+- **Header**
+    - Logo
+    - Menu chính
+    - Thanh tìm kiếm
+    - Nút đăng nhập/đăng ký hoặc avatar người dùng
+- **Hero Section**
+    - Carousel hiển thị bài viết nổi bật
+    - 3-5 bài viết với ảnh, tiêu đề và tóm tắt
+- **Phần Highlight**
+    - Y án mới nhất
+    - Bác sĩ nổi bật
+    - Bài viết được đánh giá cao
+- **Phần Bệnh Lý**
+    - Danh sách các danh mục bệnh lý
+    - Bài viết nổi bật của mỗi danh mục
+- **Phần Chủ Đề Đông Y**
+    - Danh sách các chủ đề
+    - Bài viết nổi bật của mỗi chủ đề
+- **Footer**
+    - Thông tin liên hệ
+    - Menu phụ
+    - Liên kết mạng xã hội
+
+### 6.2 Trang danh mục bệnh lý
+
+- Banner danh mục
+- Bộ lọc bài viết
+- Danh sách bài viết thuộc danh mục
+- Sidebar hiển thị bài viết phổ biến và danh mục liên quan
+
+### 6.3 Trang chi tiết bài viết
+
+- Tiêu đề và ảnh đại diện
+- Thông tin tác giả và ngày đăng
+- Nội dung bài viết
+- Số lượng like và nút like
+- Phần bình luận
+- Bài viết liên quan
+
+### 6.4 Trang đăng bài
+
+- Form đăng bài với rich text editor
+- Chọn danh mục bệnh lý và chủ đề
+- Thêm tags
+- Tải lên ảnh đại diện
+- Nút lưu nháp và đăng bài
+
+### 6.5 Trang profile người dùng
+
+- Thông tin cá nhân
+- Bài viết đã đăng
+- Bài viết đã like
+- Bình luận đã đăng
+
+### 7. Kế hoạch triển khai
+
+### 7.1 Giai đoạn 1: MVP (Minimum Viable Product)
+
+- **Tuần 1-2: Thiết lập dự án**
+    - Thiết lập cấu trúc cơ bản Next.js
+    - Tích hợp Supabase cho authentication và database
+    - Thiết kế database schema
+- **Tuần 3-4: Xây dựng core features**
+    - Chức năng đăng ký/đăng nhập
+    - CRUD cho bài viết
+    - Hiển thị danh mục bệnh lý và chủ đề
+    - Trang chủ với bài viết nổi bật
+
+### 7.2 Giai đoạn 2: Tính năng tương tác
+
+- **Tuần 5-6: Tương tác người dùng**
+    - Hệ thống bình luận
+    - Chức năng like bài viết
+    - Tìm kiếm và bộ lọc
+- **Tuần 7-8: Hoàn thiện UI/UX**
+    - Responsive design
+    - Tối ưu hóa UX
+    - Testing và sửa lỗi
+
+### 7.3 Giai đoạn 3: Tối ưu hóa và ra mắt
+
+- **Tuần 9: Tối ưu hóa**
+    - Tối ưu hóa hiệu suất
+    - Tối ưu hóa SEO
+    - Kiểm tra bảo mật
+- **Tuần 10: Ra mắt**
+    - Triển khai lên production
+    - Giám sát hệ thống
+    - Thu thập phản hồi từ người dùng
+
+### 8. Metrics và Đánh giá
+
+### 8.1 Key Performance Indicators (KPIs)
+
+- Số lượng người dùng đăng ký
+- Số lượng bài viết đăng tải
+- Số lượng bình luận và like
+- Thời gian trung bình trên trang
+- Tỷ lệ chuyển đổi (đăng ký)
+- Xếp hạng SEO cho các từ khóa liên quan đến Đông Y
+
+### 8.2 Phương pháp đánh giá
+
+- Google Analytics để theo dõi hành vi người dùng
+- Khảo sát người dùng
+- A/B testing cho các tính năng mới
+- Theo dõi và phân tích feedback
+
+### 9. Rủi ro và Biện pháp Giảm thiểu
+
+### 9.1 Rủi ro kỹ thuật
+
+- **Hiệu suất website**: Tối ưu hóa code, sử dụng caching, CDN
+- **Bảo mật dữ liệu**: Áp dụng các biện pháp bảo mật tốt nhất, regular security audit
+- **Khả năng mở rộng**: Thiết kế kiến trúc có khả năng mở rộng từ đầu
+
+### 9.2 Rủi ro nội dung
+
+- **Thông tin y tế không chính xác**: Quy trình kiểm duyệt nội dung, disclaimer về thông tin y tế
+- **Spam và nội dung xấu**: Hệ thống báo cáo và kiểm duyệt
+- **Thiếu nội dung chất lượng**: Xây dựng cộng đồng tác giả, tạo nội dung seed
+
+### 9.3 Rủi ro kinh doanh
+
+- **Thiếu người dùng**: Chiến lược marketing và SEO hiệu quả
+- **Cạnh tranh**: Tập trung vào giá trị độc đáo của nền tảng
+- **Duy trì hoạt động**: Kế hoạch kinh doanh bền vững
+
+### 10. Kết luận
+
+Website "Đông Y Kỳ Diệu" hướng đến việc xây dựng một cộng đồng chia sẻ kiến thức Đông Y chất lượng cao, đáp ứng nhu cầu đa dạng của người dùng từ người mới bắt đầu đến chuyên gia. Với tính năng nổi bật là bộ lọc bài viết theo bệnh lý và chủ đề Đông Y, website sẽ giúp người dùng dễ dàng tìm kiếm thông tin phù hợp với nhu cầu của mình. Kiến trúc kỹ thuật hiện đại sử dụng Next.js và Supabase sẽ đảm bảo hiệu suất và khả năng mở rộng trong tương lai.
+
+### Phụ lục A: Wireframes
+
+*(Các wireframes chi tiết cho trang chủ, trang danh mục, trang chi tiết bài viết và trang đăng bài sẽ được đính kèm)*
+
+### Phụ lục B: User Stories
+
+1. Là một người dùng, tôi muốn đăng ký tài khoản để có thể đăng bài và bình luận
+2. Là một người dùng, tôi muốn tìm kiếm bài viết theo bệnh lý cụ thể để tìm thông tin phù hợp với nhu cầu của mình
+3. Là một tác giả, tôi muốn đăng bài viết và phân loại theo bệnh lý và chủ đề
+4. Là một bệnh nhân, tôi muốn đọc các y án về bệnh của mình để tham khảo
+5. Là một người dùng, tôi muốn like và bình luận bài viết để tương tác với tác giả và cộng đồng
+6. Là một admin, tôi muốn quản lý bài viết và bình luận để đảm bảo chất lượng nội dung
+7. Là một nhà nghiên cứu, tôi muốn tìm kiếm thông tin chuyên sâu về các phương pháp điều trị Đông Y
