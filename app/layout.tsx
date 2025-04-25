@@ -4,6 +4,8 @@ import "./globals.css";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer"; 
 import { AuthProvider } from "@/contexts/auth-context";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -27,10 +29,11 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang='vi' suppressHydrationWarning>
-			{/* Added suppressHydrationWarning for potential theme issues */}
+		<html lang='vi'>
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} flex min-h-screen flex-col antialiased`}>
+				<Analytics />
+				<SpeedInsights />
 				<AuthProvider>
 					<Navbar /> {/* Use the new Navbar */}
 					<main className='flex-grow'>{children}</main>{" "}
