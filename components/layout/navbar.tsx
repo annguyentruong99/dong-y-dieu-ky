@@ -6,8 +6,22 @@ import { Search, Menu, X } from "lucide-react"; // Import X for close button
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils"; // Assuming you have a utility for class names
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/contexts/auth-context"; // Import useAuth
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"; // Import Avatar components
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuLabel,
+	DropdownMenuSeparator,
+	DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"; // Import DropdownMenu components
+import { signOut } from "@/lib/services/auth-service"; // Import signOut service
 
 const Navbar = () => {
+	const router = useRouter();
+	const { user, isLoading } = useAuth(); // Get user and loading state
 	// State to control mobile menu visibility
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -37,6 +51,19 @@ const Navbar = () => {
 		return () => window.removeEventListener("resize", handleResize);
 	}, []);
 
+	const handleLogout = async () => {
+		await signOut();
+		// Optionally redirect user after logout
+		// router.push("/");
+	};
+
+	// Helper to get initials from email or name
+	const getInitials = (email: string | undefined): string => {
+		if (!email) return "U"; // Default User
+		const namePart = email.split("@")[0];
+		return namePart.substring(0, 2).toUpperCase();
+	};
+
 	return (
 		<nav className='sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 shadow-sm backdrop-blur supports-[backdrop-filter]:bg-background/90'>
 			<div className='container mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8'>
@@ -61,7 +88,7 @@ const Navbar = () => {
 					))}
 				</div>
 
-				{/* Right Section: Desktop Search and Login - Hidden below md */}
+				{/* Right Section: Desktop Search and Login/Avatar - Hidden below md */}
 				<div className='hidden items-center space-x-4 lg:flex'>
 					{/* Desktop Search - Hidden below sm breakpoint within this div */}
 					<div className='relative hidden sm:block'>
@@ -75,14 +102,61 @@ const Navbar = () => {
 						{/* Search icon size is fixed but visually small */}
 						<Search className='absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground' />
 					</div>
-					<Button
-						variant='default'
-						size='sm' // Ensure Button size sm provides >44px touch target
-						className='rounded-full bg-primary px-4 text-sm font-medium text-primary-foreground hover:bg-primary/90'
-						// text-sm uses rem implicitly
-					>
-						Đăng nhập
-					</Button>
+
+					{/* Conditional Rendering: Login Button or User Avatar Dropdown */}
+					{isLoading ? (
+						// Optional: Add a loading skeleton or spinner here
+						<div className='h-8 w-20 animate-pulse rounded-full bg-muted'></div>
+					) : user ? (
+						<DropdownMenu>
+							<DropdownMenuTrigger asChild>
+								<Button
+									variant='ghost'
+									className='relative h-8 w-8 rounded-full'>
+									<Avatar className='h-8 w-8'>
+										<AvatarImage
+											src={user.user_metadata?.avatar_url || ""}
+											alt={user.email || "User Avatar"}
+										/>
+										<AvatarFallback>{getInitials(user.email)}</AvatarFallback>
+									</Avatar>
+								</Button>
+							</DropdownMenuTrigger>
+							<DropdownMenuContent
+								className='w-56 bg-background' // Ensure background color
+								align='end'
+								forceMount>
+								<DropdownMenuLabel className='font-normal'>
+									<div className='flex flex-col space-y-1'>
+										<p className='text-sm font-medium leading-none'>
+											{user.user_metadata?.full_name || "Người dùng"}
+										</p>
+										<p className='text-xs leading-none text-muted-foreground'>
+											{user.email}
+										</p>
+									</div>
+								</DropdownMenuLabel>
+								<DropdownMenuSeparator />
+								<DropdownMenuItem onClick={() => router.push("/ho-so")}>
+									Hồ sơ
+								</DropdownMenuItem>
+								<DropdownMenuSeparator />
+								<DropdownMenuItem onClick={handleLogout}>
+									Đăng xuất
+								</DropdownMenuItem>
+							</DropdownMenuContent>
+						</DropdownMenu>
+					) : (
+						<Button
+							variant='default'
+							size='sm' // Ensure Button size sm provides >44px touch target
+							className='rounded-full bg-primary px-4 text-sm font-medium text-primary-foreground hover:bg-primary/90'
+							onClick={() => {
+								router.push("/dang-nhap");
+							}}>
+							Đăng nhập
+						</Button>
+					)}
 				</div>
 
 				{/* Mobile Menu Button - Animated Icon Swap */}
@@ -157,15 +231,58 @@ const Navbar = () => {
 							</Link>
 						))}
 					</div>
-					{/* Mobile Login Button */}
-					<Button
-						variant='default'
-						size='default' // Use default size for better touch target
-						className='w-full rounded-md bg-primary text-primary-foreground hover:bg-primary/90'
-						onClick={() => setIsMobileMenuOpen(false)} // Close menu on button click
-					>
-						Đăng nhập
-					</Button>
+					{/* Mobile Login Button OR User Info */}
+					{isLoading ? (
+						<div className='h-10 w-full animate-pulse rounded-md bg-muted'></div>
+					) : user ? (
+						<div className='border-t border-border/40 pt-4 mt-4'>
+							<div className='flex items-center px-3 mb-3'>
+								<Avatar className='h-8 w-8 mr-2'>
+									<AvatarImage
+										src={user.user_metadata?.avatar_url || ""}
+										alt={user.email || "User Avatar"}
+									/>
+									<AvatarFallback>{getInitials(user.email)}</AvatarFallback>
+								</Avatar>
+								<div className='flex flex-col space-y-0.5'>
+									<p className='text-sm font-medium leading-none'>
+										{user.user_metadata?.full_name || "Người dùng"}
+									</p>
+									<p className='text-xs leading-none text-muted-foreground'>
+										{user.email}
+									</p>
+								</div>
+							</div>
+							<Link
+								href='/ho-so'
+								className='block rounded-md px-3 py-2 text-base font-medium text-foreground hover:bg-accent hover:text-accent-foreground focus:outline-none focus-visible:bg-accent focus-visible:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
+								onClick={() => setIsMobileMenuOpen(false)} // Close menu on click
+							>
+								Hồ sơ
+							</Link>
+							<Button
+								variant='ghost'
+								size='default'
+								className='w-full justify-start rounded-md px-3 py-2 text-base font-medium text-destructive hover:bg-destructive/10 hover:text-destructive focus:outline-none focus-visible:bg-destructive/10 focus-visible:text-destructive focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
+								onClick={() => {
+									handleLogout();
+									setIsMobileMenuOpen(false); // Close menu on click
+								}}>
+								Đăng xuất
+							</Button>
+						</div>
+					) : (
+						<Button
+							variant='default'
+							size='default' // Use default size for better touch target
+							className='w-full rounded-md bg-primary text-primary-foreground hover:bg-primary/90'
+							onClick={() => {
+								router.push("/dang-nhap"); // Redirect to login
+								setIsMobileMenuOpen(false); // Close menu on button click
+							}}>
+							Đăng nhập
+						</Button>
+					)}
 				</div>
 			</div>
 		</nav>
