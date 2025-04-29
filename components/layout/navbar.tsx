@@ -17,16 +17,14 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"; // Import DropdownMenu components
-import { signOut } from "@/lib/services/auth-service"; // Import signOut service
 
 const Navbar = () => {
 	const router = useRouter();
-	const { user, isLoading } = useAuth(); // Get user and loading state
+	const { user, isLoading, signOut } = useAuth(); // Get user and loading state
 	// State to control mobile menu visibility
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
 	const navLinks = [
-		{ href: "/", label: "Trang chủ" },
 		{ href: "/posts", label: "Bài viết" },
 		{ href: "/case-studies", label: "Y án" }, // Assuming slug for Y án
 		{ href: "/doctors", label: "Bác sĩ" }, // Assuming slug for Bác sĩ
@@ -51,11 +49,7 @@ const Navbar = () => {
 		return () => window.removeEventListener("resize", handleResize);
 	}, []);
 
-	const handleLogout = async () => {
-		await signOut();
-		// Optionally redirect user after logout
-		// router.push("/");
-	};
+	const handleLogout = async () => await signOut();
 
 	// Helper to get initials from email or name
 	const getInitials = (email: string | undefined): string => {

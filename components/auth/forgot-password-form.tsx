@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { resetPasswordForEmail } from "@/lib/services/auth-service";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -14,41 +14,9 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
+import { useAuth } from "@/contexts/auth-context";
 
-export default function ForgotPasswordPage() {
-	const [email, setEmail] = React.useState("");
-	const [error, setError] = React.useState<string | null>(null);
-	const [message, setMessage] = React.useState<string | null>(null);
-	const [loading, setLoading] = React.useState(false);
-
-	const handlePasswordReset = async (
-		event: React.FormEvent<HTMLFormElement>,
-	) => {
-		event.preventDefault();
-		setError(null);
-		setMessage(null);
-		setLoading(true);
-
-		const { error: resetError } = await resetPasswordForEmail(email);
-
-		setLoading(false);
-
-		if (resetError) {
-			console.error("Password reset error:", resetError.message);
-			// Provide specific errors if possible, otherwise generic
-			// Example: Check for user not found, although Supabase might not expose that directly
-			setError(
-				"Đã xảy ra lỗi khi gửi yêu cầu đặt lại mật khẩu. Vui lòng thử lại.",
-			);
-		} else {
-			// Success! Show message asking user to check email
-			setEmail(""); // Clear field
-			setMessage(
-				"Nếu email của bạn tồn tại trong hệ thống, bạn sẽ nhận được một liên kết đặt lại mật khẩu.",
-			);
-		}
-	};
-
+export function ForgotPasswordForm() {
 	return (
 		// Center the card vertically and horizontally, add padding
 		<div className='flex min-h-[calc(100vh_-_theme(spacing.16)_-_theme(spacing.16))] items-center justify-center bg-background px-4 py-12 md:min-h-0 md:py-24'>
