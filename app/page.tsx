@@ -1,3 +1,5 @@
+"use client";
+
 import { HeroSection } from "@/components/home/hero-section";
 import { FeaturedContentSection } from "@/components/home/featured-content-section";
 import { ArticleListSection } from "@/components/home/article-list-section";

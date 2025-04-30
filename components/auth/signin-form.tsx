@@ -124,7 +124,7 @@ export function SignInForm() {
 						{/* Added w-full for centering text */}
 						Chưa có tài khoản?
 						<Link
-							href='/dang-ki'
+							href='/dang-ky'
 							className='ml-1 font-medium text-primary hover:underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring'>
 							Đăng ký ngay
 						</Link>

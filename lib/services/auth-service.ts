@@ -2,8 +2,12 @@ import { createClient } from "@/utils/supabase/client";
 import {
 	SignUpFormData,
 	LoginFormData,
+	ForgotPasswordFormData,
 	signUpSchema,
 	loginSchema,
+	forgotPasswordSchema,
+	resetPasswordSchema,
+	ResetPasswordFormData,
 } from "../validations/auth-validations";
 
 export class AuthService {
@@ -24,7 +28,7 @@ export class AuthService {
 					password,
 					options: {
 						data: {
-							name,
+							name: fullName,
 						},
 					},
 				});
@@ -106,16 +110,56 @@ export class AuthService {
 		}
 	}
 
-	/**
-	 * Get the current authenticated user
-	 */
-	static async getCurrentUser() {
+	static async forgotPassword({ email }: ForgotPasswordFormData) {
 		try {
-			const { data } = await this.supabaseClient.auth.getUser();
-			return data.user;
+			// Validate the input data
+			forgotPasswordSchema.parse({ email });
+
+			const { data, error } =
+				await this.supabaseClient.auth.resetPasswordForEmail(email, {
+					redirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/dat-lai-mat-khau`,
+				});
+
+			if (error) {
+				throw error;
+			}
+
+			return { success: true, data };
 		} catch (error) {
-			console.error("Get current user error:", error);
-			return null;
+			console.error("Forgot password error:", error);
+			return {
+				success: false,
+				error:
+					error instanceof Error
+						? error.message
+						: "An unexpected error occurred",
+			};
+		}
+	}
+
+	static async resetPassword({ password }: ResetPasswordFormData) {
+		try {
+			// Validate the input data
+			resetPasswordSchema.parse({ password });
+
+			const { data, error } = await this.supabaseClient.auth.updateUser({
+				password,
+			});
+
+			if (error) {
+				throw error;
+			}
+
+			return { success: true, data };
+		} catch (error) {
+			console.error("Reset password error:", error);
+			return {
+				success: false,
+				error:
+					error instanceof Error
+						? error.message
+						: "An unexpected error occurred",
+			};
 		}
 	}
 }

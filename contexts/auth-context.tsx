@@ -19,6 +19,8 @@ interface AuthContextType {
 	signUp: (email: string, password: string, fullName: string) => Promise<void>;
 	signIn: (email: string, password: string) => Promise<void>;
 	signOut: () => Promise<void>;
+	forgotPassword: (email: string) => Promise<void>;
+	resetPassword: (password: string) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -79,7 +81,7 @@ function AuthProvider({ children }: { children: ReactNode }) {
 			}
 
 			toast.success("Tạo tài khoản thành công! Vui lòng đăng nhập.");
-			router.push("/login");
+			router.push("/dang-nhap");
 		} catch (error) {
 			const errorMessage =
 				error instanceof Error ? error.message : "Failed to create account";
@@ -135,8 +137,61 @@ function AuthProvider({ children }: { children: ReactNode }) {
 		}
 	};
 
+	// Forgot password function
+	const forgotPassword = async (email: string) => {
+		try {
+			setIsLoading(true);
+			const result = await AuthService.forgotPassword({ email });
+
+			if (!result.success) {
+				throw new Error(result.error as string);
+			}
+
+			toast.success("Email đặt lại mật khẩu đã được gửi!");
+			router.push("/dang-nhap");
+		} catch (error) {
+			const errorMessage =
+				error instanceof Error ? error.message : "Failed to forgot password";
+			toast.error(errorMessage);
+			throw error;
+		} finally {
+			setIsLoading(false);
+		}
+	};
+
+	// Reset password function
+	const resetPassword = async (password: string) => {
+		try {
+			setIsLoading(true);
+			const result = await AuthService.resetPassword({ password });
+
+			if (!result.success) {
+				throw new Error(result.error as string);
+			}
+
+			toast.success("Mật khẩu đã được đặt lại!");
+			router.push("/dang-nhap");
+		} catch (error) {
+			const errorMessage =
+				error instanceof Error ? error.message : "Failed to reset password";
+			toast.error(errorMessage);
+			throw error;
+		} finally {
+			setIsLoading(false);
+		}
+	};
+
 	return (
-		<AuthContext.Provider value={{ user, isLoading, signUp, signIn, signOut }}>
+		<AuthContext.Provider
+			value={{
+				user,
+				isLoading,
+				signUp,
+				signIn,
+				signOut,
+				forgotPassword,
+				resetPassword,
+			}}>
 			{children}
 		</AuthContext.Provider>
 	);

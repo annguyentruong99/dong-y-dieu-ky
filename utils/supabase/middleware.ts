@@ -46,7 +46,9 @@ export async function updateSession(request: NextRequest) {
 	// Auth routes should redirect to dashboard if already authenticated
 	const isAuthRoute =
 		request.nextUrl.pathname === "/dang-nhap" ||
-		request.nextUrl.pathname === "/dang-ky";
+		request.nextUrl.pathname === "/dang-ky" ||
+		request.nextUrl.pathname === "/doi-mat-khau" ||
+		request.nextUrl.pathname === "/dat-lai-mat-khau";
 
 	// If accessing protected route and not authenticated, redirect to login
 	if (isProtectedRoute && !user) {

@@ -16,13 +16,13 @@ import {
 import { Label } from "@/components/ui/label";
 import { useAuth } from "@/contexts/auth-context";
 
-export function ForgotPasswordForm() {
-	const { forgotPassword, isLoading } = useAuth();
-	const [email, setEmail] = useState("");
+export function ResetPasswordForm() {
+	const { resetPassword, isLoading } = useAuth();
+	const [password, setPassword] = useState("");
 
 	const handlePasswordReset = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		await forgotPassword(email);
+		await resetPassword(password);
 	};
 
 	return (
@@ -30,30 +30,28 @@ export function ForgotPasswordForm() {
 		<div className='flex min-h-[calc(100vh_-_theme(spacing.16)_-_theme(spacing.16))] items-center justify-center bg-background px-4 py-12 md:min-h-0 md:py-24'>
 			<Card className='w-full max-w-md'>
 				<CardHeader className='text-center'>
-					<CardTitle className='text-2xl font-bold'>Quên mật khẩu?</CardTitle>
-					<CardDescription>
-						Nhập email của bạn để nhận liên kết đặt lại mật khẩu.
-					</CardDescription>
+					<CardTitle className='text-2xl font-bold'>Đặt lại mật khẩu</CardTitle>
+					<CardDescription>Nhập mật khẩu mới của bạn.</CardDescription>
 				</CardHeader>
 				<CardContent>
 					<form onSubmit={handlePasswordReset} className='space-y-4'>
 						{/* Email Input */}
 						<div className='space-y-2'>
-							<Label htmlFor='email'>Email</Label>
+							<Label htmlFor='password'>Mật khẩu mới</Label>
 							<Input
-								id='email'
-								type='email'
-								placeholder='ten@example.com'
+								id='password'
+								type='password'
+								placeholder='Mật khẩu mới'
 								required
-								value={email}
-								onChange={(e) => setEmail(e.target.value)}
+								value={password}
+								onChange={(e) => setPassword(e.target.value)}
 								disabled={isLoading}
-								autoComplete='email'
+								autoComplete='password'
 							/>
 						</div>
 						{/* Submit Button */}
 						<Button type='submit' className='w-full' disabled={isLoading}>
-							{isLoading ? "Đang gửi..." : "Gửi liên kết đặt lại"}
+							{isLoading ? "Đang gửi..." : "Đặt lại mật khẩu"}
 						</Button>
 					</form>
 				</CardContent>
