@@ -28,7 +28,7 @@ export function CtaBannerSection() {
 								variant='secondary' // Typically light background in shadcn
 								size='lg' // Larger button for CTA
 								className='rounded-full px-8 text-primary hover:bg-secondary/90'>
-								<Link href='/register'>Đăng ký tài khoản</Link>
+								<Link href='/dang-ky'>Đăng ký tài khoản</Link>
 							</Button>
 							<Button
 								asChild

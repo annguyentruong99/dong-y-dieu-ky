@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
+import { Toaster } from "sonner";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import Navbar from "@/components/layout/navbar";
-import Footer from "@/components/layout/footer"; 
-import { AuthProvider } from "@/contexts/auth-context";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+
+import "./globals.css";
+import Navbar from "@/components/layout/navbar";
+import Footer from "@/components/layout/footer";
+import { AuthProvider } from "@/contexts/auth-context";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -32,13 +34,15 @@ export default function RootLayout({
 		<html lang='vi'>
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} flex min-h-screen flex-col antialiased`}>
-				<Analytics />
-				<SpeedInsights />
 				<AuthProvider>
-					<Navbar /> {/* Use the new Navbar */}
-					<main className='flex-grow'>{children}</main>{" "}
-					{/* Wrap children in main and allow grow */}
-					<Footer /> {/* Add the Footer */}
+					<Toaster position='bottom-center' />
+					<Analytics />
+					<SpeedInsights />
+					<main className='flex-grow'>
+						<Navbar />
+						{children}
+						<Footer />
+					</main>
 				</AuthProvider>
 			</body>
 		</html>

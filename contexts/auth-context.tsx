@@ -1,68 +1,210 @@
 "use client";
 
-import * as React from "react";
-import type { Session, User } from "@supabase/supabase-js";
-import { createClient } from "@/lib/supabase/client"; // Use client helper
-import { onAuthStateChange } from "@/lib/services/auth-service"; // Use auth service
+import {
+	createContext,
+	useEffect,
+	useState,
+	ReactNode,
+	useContext,
+} from "react";
+import { createClient } from "@/utils/supabase/client";
+import { AuthService } from "@/lib/services/auth-service";
+import { useRouter } from "next/navigation";
+import { User } from "@supabase/supabase-js";
+import { toast } from "sonner";
 
 interface AuthContextType {
-	session: Session | null;
 	user: User | null;
 	isLoading: boolean;
+	signUp: (email: string, password: string, fullName: string) => Promise<void>;
+	signIn: (email: string, password: string) => Promise<void>;
+	signOut: () => Promise<void>;
+	forgotPassword: (email: string) => Promise<void>;
+	resetPassword: (password: string) => Promise<void>;
 }
 
-const AuthContext = React.createContext<AuthContextType | undefined>(undefined);
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-interface AuthProviderProps {
-	children: React.ReactNode;
-}
+function AuthProvider({ children }: { children: ReactNode }) {
+	const [user, setUser] = useState<User | null>(null);
+	const [isLoading, setIsLoading] = useState<boolean>(true);
+	const router = useRouter();
 
-export function AuthProvider({ children }: AuthProviderProps) {
-	const [session, setSession] = React.useState<Session | null>(null);
-	const [user, setUser] = React.useState<User | null>(null);
-	const [isLoading, setIsLoading] = React.useState(true); // Start loading
+	const supabaseClient = createClient();
 
-	React.useEffect(() => {
-		setIsLoading(true);
-		const supabase = createClient();
+	// Initialize and set up auth state listener
+	useEffect(() => {
+		// Check for current session
+		const checkSession = async () => {
+			try {
+				const {
+					data: { session },
+				} = await supabaseClient.auth.getSession();
+				setUser(session?.user || null);
+			} catch (error) {
+				console.error("Error checking auth session:", error);
+				setUser(null);
+			} finally {
+				setIsLoading(false);
+			}
+		};
 
-		// Get initial session
-		supabase.auth.getSession().then(({ data: { session } }) => {
-			setSession(session);
-			setUser(session?.user ?? null);
+		// Run initial check
+		checkSession();
+
+		// Set up auth state change listener
+		const {
+			data: { subscription },
+		} = supabaseClient.auth.onAuthStateChange(async (event, session) => {
+			setUser(session?.user || null);
 			setIsLoading(false);
 		});
 
-		// Listen for auth state changes
-		const authSubscription = onAuthStateChange((event, session) => {
-			setSession(session);
-			setUser(session?.user ?? null);
-			setIsLoading(false); // Ensure loading is false after initial check & changes
-		});
-
-		// Cleanup subscription on unmount
+		// Clean up subscription
 		return () => {
-			authSubscription?.subscription.unsubscribe();
+			subscription.unsubscribe();
 		};
 	}, []);
 
-	const value = React.useMemo(
-		() => ({
-			session,
-			user,
-			isLoading,
-		}),
-		[session, user, isLoading],
-	);
+	// Sign up function
+	const signUp = async (email: string, password: string, fullName: string) => {
+		try {
+			setIsLoading(true);
+			const result = await AuthService.signUp({
+				email,
+				password,
+				fullName,
+			});
 
-	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+			if (!result.success) {
+				throw new Error(result.error as string);
+			}
+
+			toast.success("Tạo tài khoản thành công! Vui lòng đăng nhập.");
+			router.push("/dang-nhap");
+		} catch (error) {
+			const errorMessage =
+				error instanceof Error ? error.message : "Failed to create account";
+			toast.error(errorMessage);
+			throw error;
+		} finally {
+			setIsLoading(false);
+		}
+	};
+
+	// Sign in function
+	const signIn = async (email: string, password: string) => {
+		try {
+			setIsLoading(true);
+			const result = await AuthService.signIn({ email, password });
+
+			if (!result.success) {
+				throw new Error(result.error as string);
+			}
+
+			setUser(result.data?.user || null);
+			toast.success("Đăng nhập thành công!");
+			router.push("/");
+		} catch (error) {
+			const errorMessage =
+				error instanceof Error ? error.message : "Failed to sign in";
+			toast.error(errorMessage);
+			throw error;
+		} finally {
+			setIsLoading(false);
+		}
+	};
+
+	// Sign out function
+	const signOut = async () => {
+		try {
+			setIsLoading(true);
+			const result = await AuthService.logout();
+
+			if (!result.success) {
+				throw new Error(result.error as string);
+			}
+
+			setUser(null);
+			toast.success("Đăng xuất thành công!");
+		} catch (error) {
+			const errorMessage =
+				error instanceof Error ? error.message : "Failed to sign out";
+			toast.error(errorMessage);
+			throw error;
+		} finally {
+			setIsLoading(false);
+		}
+	};
+
+	// Forgot password function
+	const forgotPassword = async (email: string) => {
+		try {
+			setIsLoading(true);
+			const result = await AuthService.forgotPassword({ email });
+
+			if (!result.success) {
+				throw new Error(result.error as string);
+			}
+
+			toast.success("Email đặt lại mật khẩu đã được gửi!");
+			router.push("/dang-nhap");
+		} catch (error) {
+			const errorMessage =
+				error instanceof Error ? error.message : "Failed to forgot password";
+			toast.error(errorMessage);
+			throw error;
+		} finally {
+			setIsLoading(false);
+		}
+	};
+
+	// Reset password function
+	const resetPassword = async (password: string) => {
+		try {
+			setIsLoading(true);
+			const result = await AuthService.resetPassword({ password });
+
+			if (!result.success) {
+				throw new Error(result.error as string);
+			}
+
+			toast.success("Mật khẩu đã được đặt lại!");
+			router.push("/dang-nhap");
+		} catch (error) {
+			const errorMessage =
+				error instanceof Error ? error.message : "Failed to reset password";
+			toast.error(errorMessage);
+			throw error;
+		} finally {
+			setIsLoading(false);
+		}
+	};
+
+	return (
+		<AuthContext.Provider
+			value={{
+				user,
+				isLoading,
+				signUp,
+				signIn,
+				signOut,
+				forgotPassword,
+				resetPassword,
+			}}>
+			{children}
+		</AuthContext.Provider>
+	);
 }
 
-// Custom hook to use the AuthContext
-export function useAuth() {
-	const context = React.useContext(AuthContext);
-	if (context === undefined) {
+function useAuth() {
+	const context = useContext(AuthContext);
+
+	if (!context) {
 		throw new Error("useAuth must be used within an AuthProvider");
 	}
+
 	return context;
 }
+
+export { AuthContext, AuthProvider, useAuth };
