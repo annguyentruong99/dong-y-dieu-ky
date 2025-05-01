@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Toaster } from "sonner";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -33,7 +32,6 @@ export default function RootLayout({
 		<html lang='vi'>
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} flex min-h-screen flex-col antialiased`}>
-				<Toaster position='bottom-center' />
 				<Analytics />
 				<SpeedInsights />
 				<main className='flex-grow'>
