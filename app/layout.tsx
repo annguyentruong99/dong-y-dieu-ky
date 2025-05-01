@@ -7,7 +7,6 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
-import { AuthProvider } from "@/contexts/auth-context";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -34,16 +33,14 @@ export default function RootLayout({
 		<html lang='vi'>
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} flex min-h-screen flex-col antialiased`}>
-				<AuthProvider>
-					<Toaster position='bottom-center' />
-					<Analytics />
-					<SpeedInsights />
-					<main className='flex-grow'>
-						<Navbar />
-						{children}
-						<Footer />
-					</main>
-				</AuthProvider>
+				<Toaster position='bottom-center' />
+				<Analytics />
+				<SpeedInsights />
+				<main className='flex-grow'>
+					<Navbar />
+					{children}
+					<Footer />
+				</main>
 			</body>
 		</html>
 	);
