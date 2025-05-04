@@ -13,10 +13,9 @@ const Navbar = () => {
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
 	const navLinks = [
-		{ href: "/posts", label: "Bài viết" },
-		{ href: "/case-studies", label: "Y án" }, // Assuming slug for Y án
-		{ href: "/doctors", label: "Bác sĩ" }, // Assuming slug for Bác sĩ
-		{ href: "/contact", label: "Liên hệ" },
+		{ href: "/bai-viet", label: "Bài viết" },
+		{ href: "/y-an", label: "Y án" }, // Assuming slug for Y án
+		{ href: "/cau-chuyen-bac-si", label: "Bác sĩ" }, // Assuming slug for Bác sĩ
 	];
 
 	// Toggle mobile menu state
@@ -55,33 +54,35 @@ const Navbar = () => {
 					</Link>
 				</div>
 
-				{/* Middle Section: Desktop Navigation Links - Hidden below md */}
-				<div className='hidden items-center space-x-6 lg:flex'>
-					{navLinks.map((link) => (
-						<Link
-							key={link.href}
-							href={link.href}
-							className='text-base font-medium text-foreground transition-colors hover:text-primary'
-							// Font size uses relative unit (rem) via text-base
-						>
-							{link.label}
-						</Link>
-					))}
-				</div>
+				<div className='flex items-center gap-10'>
+					{/* Middle Section: Desktop Navigation Links - Hidden below md */}
+					<div className='hidden items-center space-x-6 lg:flex'>
+						{navLinks.map((link) => (
+							<Link
+								key={link.href}
+								href={link.href}
+								className='text-base font-medium text-foreground transition-colors hover:text-primary'
+								// Font size uses relative unit (rem) via text-base
+							>
+								{link.label}
+							</Link>
+						))}
+					</div>
 
-				{/* Right Section: Desktop Search and Login/Avatar - Hidden below md */}
-				<div className='hidden items-center space-x-4 lg:flex'>
-					{/* Desktop Search - Hidden below sm breakpoint within this div */}
-					<div className='relative hidden sm:block'>
-						<Input
-							type='search'
-							placeholder='Tìm kiếm...'
-							// Use rem/em for size implicitly via h-9 (height), pl/pr (padding)
-							// Ensure Input component itself is responsive if custom
-							className='h-9 w-full rounded-full bg-muted pl-8 pr-4 text-sm placeholder:text-placeholder focus-visible:ring-primary'
-						/>
-						{/* Search icon size is fixed but visually small */}
-						<Search className='absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground' />
+					{/* Right Section: Desktop Search and Login/Avatar - Hidden below md */}
+					<div className='hidden items-center space-x-4 lg:flex'>
+						{/* Desktop Search - Hidden below sm breakpoint within this div */}
+						<div className='relative hidden sm:block'>
+							<Input
+								type='search'
+								placeholder='Tìm kiếm...'
+								// Use rem/em for size implicitly via h-9 (height), pl/pr (padding)
+								// Ensure Input component itself is responsive if custom
+								className='h-9 w-full rounded-full bg-muted pl-8 pr-4 text-sm placeholder:text-placeholder focus-visible:ring-primary'
+							/>
+							{/* Search icon size is fixed but visually small */}
+							<Search className='absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground' />
+						</div>
 					</div>
 				</div>
 
