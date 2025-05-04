@@ -18,7 +18,6 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import { ArticleCardSkeleton } from "../article-card-skeleton";
 
 interface ArticleGridProps {
 	itemsPerPage: number;
@@ -35,7 +34,6 @@ export function ArticlesGrid({
 	initialCursor = null,
 	initialCategoryId = undefined,
 }: ArticleGridProps) {
-	console.log(initialCategoryId);
 	const [isLoading, setIsLoading] = useState(!initialArticles.length);
 	const [articles, setArticles] = useState<WixPost[]>(initialArticles);
 	const [categories, setCategories] = useState<Category[]>(initialCategories);
