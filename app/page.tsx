@@ -24,7 +24,7 @@ export default async function Home() {
 		getCategories(),
 	]);
 
-	const postsWithMember: PostWithMemberAndCategory = await Promise.all(
+	const postsWithMember: PostWithMemberAndCategory[] = await Promise.all(
 		posts.map(async (post) => {
 			const member = await getMember(post.memberId!);
 			const categoriesMap = post.categoryIds?.map((id) =>
@@ -45,7 +45,7 @@ export default async function Home() {
 			<HeroSection articles={postsWithMember} />
 
 			{/* Featured Content Section */}
-			<FeaturedContentSection />
+			<FeaturedContentSection featuredPosts={postsWithMember} />
 
 			{/* Article List Section */}
 			<ArticlesGrid

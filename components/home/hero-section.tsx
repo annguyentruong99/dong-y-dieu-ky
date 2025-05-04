@@ -16,7 +16,7 @@ import { format } from "date-fns";
 import { PostWithMemberAndCategory } from "@/types/posts";
 
 interface HeroSectionProps {
-	articles: PostWithMemberAndCategory;
+	articles: PostWithMemberAndCategory[];
 }
 
 export function HeroSection({ articles }: HeroSectionProps) {
@@ -98,9 +98,9 @@ export function HeroSection({ articles }: HeroSectionProps) {
 									<div className='absolute inset-0 flex flex-col justify-end p-6 sm:p-8 lg:p-12'>
 										{article.categories?.map((category) => (
 											<span
-												key={category._id}
+												key={category?._id}
 												className='mb-2 inline-block self-start rounded-full bg-primary px-3 py-1 text-xs font-medium text-primary-foreground sm:text-sm'>
-												{category.label}
+												{category?.label}
 											</span>
 										))}
 										<a

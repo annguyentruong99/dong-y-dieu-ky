@@ -9,7 +9,7 @@ export interface Posts {
 	};
 }
 
-export type PostWithMemberAndCategory = (WixPost & {
+export type PostWithMemberAndCategory = WixPost & {
 	member: Member | null;
 	categories: (Category | undefined)[] | null;
-})[];
+};

@@ -18,6 +18,7 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
+import { ArticleCardSkeleton } from "../article-card-skeleton";
 
 interface ArticleGridProps {
 	itemsPerPage: number;
