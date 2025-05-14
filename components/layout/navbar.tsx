@@ -12,11 +12,11 @@ const Navbar = () => {
 	// State to control mobile menu visibility
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-	const navLinks = [
-		{ href: "/bai-viet", label: "Bài viết" },
-		{ href: "/y-an", label: "Y án" }, // Assuming slug for Y án
-		{ href: "/cau-chuyen-bac-si", label: "Bác sĩ" }, // Assuming slug for Bác sĩ
-	];
+	// const navLinks = [
+	// 	{ href: "/bai-viet", label: "Bài viết" },
+	// 	{ href: "/y-an", label: "Y án" }, // Assuming slug for Y án
+	// 	{ href: "/cau-chuyen-bac-si", label: "Bác sĩ" }, // Assuming slug for Bác sĩ
+	// ];
 
 	// Toggle mobile menu state
 	const toggleMobileMenu = () => {
@@ -56,7 +56,7 @@ const Navbar = () => {
 
 				<div className='flex items-center gap-10'>
 					{/* Middle Section: Desktop Navigation Links - Hidden below md */}
-					<div className='hidden items-center space-x-6 lg:flex'>
+					{/* <div className='hidden items-center space-x-6 lg:flex'>
 						{navLinks.map((link) => (
 							<Link
 								key={link.href}
@@ -67,7 +67,7 @@ const Navbar = () => {
 								{link.label}
 							</Link>
 						))}
-					</div>
+					</div> */}
 
 					{/* Right Section: Desktop Search and Login/Avatar - Hidden below md */}
 					<div className='hidden items-center space-x-4 lg:flex'>
@@ -147,7 +147,7 @@ const Navbar = () => {
 						<Search className='absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground' />
 					</div>
 					{/* Mobile Navigation Links - Added focus styles */}
-					<div className='grid gap-y-2'>
+					{/* <div className='grid gap-y-2'>
 						{navLinks.map((link) => (
 							<Link
 								key={link.href}
@@ -157,7 +157,7 @@ const Navbar = () => {
 								{link.label}
 							</Link>
 						))}
-					</div>
+					</div> */}
 				</div>
 			</div>
 		</nav>

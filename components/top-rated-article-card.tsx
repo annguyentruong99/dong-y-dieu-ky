@@ -30,7 +30,7 @@ export function TopRatedArticleCard({
 						featuredArticles.map((article) => (
 							<Link
 								key={article._id}
-								href={`/bai-viet/${article.slug}`}
+								href={`/bai-viet/${article._id}`}
 								// Use bg-card here for contrast against bg-muted card, or adjust as needed
 								className='block rounded-md bg-background p-3 transition-colors focus:outline-none focus-visible:bg-accent/50 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1'>
 								<div className='flex items-start gap-4'>

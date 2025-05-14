@@ -17,35 +17,36 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-	const ITEMS_PER_PAGE = 9; // Number of articles per page for grid view
+	const ITEMS_PER_PAGE = 15; // Number of articles per page for grid view
 
 	const [{ posts, paging }, categories] = await Promise.all([
 		getPosts(ITEMS_PER_PAGE, null, GetPostsSort.PUBLISHED_DATE_DESC, undefined),
 		getCategories(),
 	]);
 
-	const postsWithMember: PostWithMemberAndCategory[] = await Promise.all(
-		posts.map(async (post) => {
-			const member = await getMember(post.memberId!);
-			const categoriesMap = post.categoryIds?.map((id) =>
-				categories.find((category) => category._id === id),
-			);
-			return {
-				...post,
-				member,
-				categories: categoriesMap ?? null,
-			};
-		}),
-	);
+	const postsWithMemberAndCategories: PostWithMemberAndCategory[] =
+		await Promise.all(
+			posts.map(async (post) => {
+				const member = await getMember(post.memberId!);
+				const categoriesMap = post.categoryIds?.map((id) =>
+					categories.find((category) => category._id === id),
+				);
+				return {
+					...post,
+					member,
+					categories: categoriesMap ?? null,
+				};
+			}),
+		);
 
 	return (
 		// Main container for the page content
 		<div className='flex flex-col'>
 			{/* Hero Section - Takes full width */}
-			<HeroSection articles={postsWithMember} />
+			<HeroSection articles={postsWithMemberAndCategories} />
 
 			{/* Featured Content Section */}
-			<FeaturedContentSection featuredPosts={postsWithMember} />
+			<FeaturedContentSection featuredPosts={postsWithMemberAndCategories} />
 
 			{/* Article List Section */}
 			<ArticlesGrid

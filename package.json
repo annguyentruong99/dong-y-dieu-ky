@@ -21,6 +21,7 @@
     "@wix/blog": "^1.0.408",
     "@wix/data": "^1.0.222",
     "@wix/members": "^1.0.257",
+    "@wix/ricos": "^10.129.1",
     "@wix/sdk": "^1.15.20",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

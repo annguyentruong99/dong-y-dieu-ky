@@ -49,7 +49,7 @@ export function ArticleCard({
 	}
 
 	return (
-		<Link href={`/bai-viet/${article.slug}`} className='focus:outline-none'>
+		<Link href={`/bai-viet/${article._id}`} className='focus:outline-none'>
 			<Card
 				className={cn(
 					"p-0 h-full border-0 overflow-hidden bg-background shadow-md transition-shadow hover:shadow-lg",

@@ -104,7 +104,7 @@ export function HeroSection({ articles }: HeroSectionProps) {
 											</span>
 										))}
 										<a
-											href={`/bai-viet/${article.slug}`}
+											href={`/bai-viet/${article._id}`}
 											className='focus:outline-none'>
 											<h2 className='mt-1 text-xl font-bold text-white sm:text-2xl lg:text-4xl hover:underline focus-visible:underline'>
 												{article.title}

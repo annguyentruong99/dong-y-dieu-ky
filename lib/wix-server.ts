@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 
 import { createClient, OAuthStrategy } from "@wix/sdk";
 import { posts, categories } from "@wix/blog";
-import { members } from "@wix/members";
+import { members, authentication } from "@wix/members";
 
 export const createWixServerClient = async () => {
 	// Wix modules
@@ -18,6 +18,7 @@ export const createWixServerClient = async () => {
 		posts,
 		categories,
 		members,
+		authentication,
 	};
 
 	const cookieStore = await cookies();
