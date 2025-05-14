@@ -5,7 +5,11 @@ import { PostWithMemberAndCategory } from "@/types/posts";
 import { PostHeader } from "@/components/post/post-header";
 import { PostContent } from "@/components/post/post-content";
 
-export default async function PostPage({ params }: { params: { id: string } }) {
+export default async function PostPage({
+	params,
+}: {
+	params: Promise<{ id: string }>;
+}) {
 	const { id } = await params;
 	const post = await getPostById(id);
 
